@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+   
+    
+    <script src="./z-firebase.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <button  class="btn btn-primary" id="signin">Submit</button>
+                <button  class="btn btn-secondary" id="create">Create</button>
+              </form>
+        </div>
+    </div>
+</body>
+<script>
+
+
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB2VE9OZAI2Wu9vXYxkYUORmS9e5oGJL-4",
+    authDomain: "test-electron-20532.firebaseapp.com",
+    databaseURL: "https://test-electron-20532.firebaseio.com",
+    projectId: "test-electron-20532",
+    storageBucket: "test-electron-20532.appspot.com",
+    messagingSenderId: "571761412831",
+    appId: "1:571761412831:web:4f98d95d52c0ae81ca376a",
+    measurementId: "G-X8T3JH6WM1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+  console.log("doneeee222");
+
+
+  var signBtn = document.getElementById("signin");
+
+  var create = document.getElementById("create");
+
+
+  create.addEventListener("click",function(event){
+
+    event.preventDefault();
+    var email = document.getElementById("exampleInputEmail1").value;
+
+    var password = document.getElementById("exampleInputPassword1").value;
+
+
+    firebase.auth().createUserWithEmailAndPassword(email,password).then(function(){
+        alert('User Created')
+    }).catch(function(error){
+        if(error !=null){
+            console.log(error.message);
+            return;
+        }
+        console.log("user created")
+    });
+  })
+
+  signBtn.addEventListener("click",function(event){
+
+    event.preventDefault();
+    var email = document.getElementById("exampleInputEmail1").value;
+
+    var password = document.getElementById("exampleInputPassword1").value;
+
+    firebase.auth().signInWithEmailAndPassword(email,password).then(function(){
+        document.location.href ="pageTwo.html"
+    }).catch(function(error){
+        if(error !=null){
+            console.log(error.message);
+            return;
+        }
+    })
+  })
+
+</script>
+</html>
